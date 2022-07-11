@@ -1,0 +1,89 @@
+    https://medium.com/hackernoon/how-i-built-a-content-management-system-for-a-react-app-in-one-day-269df17f5509
+    https://github.com/tylermcginnis/re-base
+    https://medium.com/swlh/create-a-web-page-using-react-d5ad9d03fb1f
+    https://www.figma.com/file/ur8kuVvVH6E7xqNEsbQfCt/Untitled?node-id=0%3A1
+    
+    
+    // noSort(itemList) {
+    //     let items = [];
+    //     const len = itemList.length;
+    //     for (let i=0;i<len;i++) {
+    //         items.push(this.renderItem(itemList[i]));
+    //     }
+    //     return items;
+    // }
+
+    // sortAlphabet(itemList) {
+    //     let items = [];
+    //     itemList.sort(function(a,b) {
+    //         let nameA= a.name.toLowerCase(), nameB = b.name.toLowerCase();
+    //         if (nameA > nameB) {
+    //             return 1;
+    //         } else if (nameA < nameB) {
+    //             return -1;
+    //         } else {
+    //             return 0;
+    //         }
+    //     });
+    //     const len = itemList.length;
+    //     for (let i=0;i<len;i++) {
+    //         items.push(this.renderItem(itemList[i]));
+    //     }
+    //     return items;
+    // }
+
+    // sortLocation(itemList) {
+    //     let items = [];
+    //     itemList.sort(function(a,b) {
+    //         let nameA= a.location.toLowerCase(), nameB = b.location.toLowerCase();
+    //         if (nameA > nameB) {
+    //             return 1;
+    //         } else if (nameA < nameB) {
+    //             return -1;
+    //         } else {
+    //             return 0;
+    //         }
+    //     });
+    //     const len = itemList.length;
+    //     for (let i=0;i<len;i++) {
+    //         items.push(this.renderItem(itemList[i]));
+    //     }
+    //     return items;
+    // }
+
+    // sortDiet(itemList) {
+    //     let items = [];
+    //     itemList.sort(function(a,b) {
+    //         let nameA= a.diet.toLowerCase(), nameB = b.diet.toLowerCase();
+    //         if (nameA > nameB) {
+    //             return 1;
+    //         } else if (nameA < nameB) {
+    //             return -1;
+    //         } else {
+    //             return 0;
+    //         }
+    //     });
+    //     const len = itemList.length;
+    //     for (let i=0;i<len;i++) {
+    //         items.push(this.renderItem(itemList[i]));
+    //     }
+    //     return items;
+    // }
+
+    // renderCatalogue(itemList) {
+    //     const type = this.state.sort;
+    //     switch (type) {
+    //         case "none":
+    //             return this.noSort(itemList);
+    //         case "alpha":
+    //             return this.sortAlphabet(itemList);
+    //         case "period":
+    //             return this.sortPeriod(itemList);
+    //         case "location":
+    //             return this.sortLocation(itemList);
+    //         case "diet":
+    //             return this.sortDiet(itemList);
+    //         default:
+    //             break;
+    //     }
+    // }

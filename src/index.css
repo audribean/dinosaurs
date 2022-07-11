@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* CATALOGUE STYLING */
+
+.item {
+  max-width: 20%;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.item img {
+  object-fit: cover;
+  max-width: 100%;
+}
+
+#catalogue {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2%;
+}

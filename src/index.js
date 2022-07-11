@@ -1,17 +1,187 @@
 import React from 'react';
+import {DINOSAURS} from './dinosaurs';
+import {ORDER} from './dinosaurs';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const _ = require("lodash");
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// <div style = {{backgroundImage: `url(${imageName})`}}></div>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/*
+TODOS
+1. this.onchange -> how to pass value of select to parent node?
+1.a. handleclick
+2. create filter checkbox
+
+*/
+
+function Item(props) {
+    const imageName = require(`${props.value.image}`);
+    // TODO: add altText prop to dinosaurs.js
+    const altText = `Artistic rendering of the ${props.value.name}`;
+    return (
+        <div class="item">
+            <p><b>{props.value.name}</b></p>
+            <img
+                src={imageName}
+                alt={altText}>
+            </img>
+            <a href={props.value.source}>Image Source</a>
+            <p>{props.value.period}</p>
+            <p>{props.value.location}</p>
+            <p>{props.value.diet}</p>
+        </div>
+    )
+}
+
+function Sort(props) {
+    return (
+        <div>
+            <label for="sort">Sort by: </label>
+            <select name="sort" id="sort">
+                <option value="none"></option>
+                <option value="alpha">Alphabet A-Z</option>
+                <option value="period">Time Period (Oldest-Youngest)</option>
+                <option value="location">Location Found</option>
+                <option value="diet">Diet</option>
+            </select>
+        </div> 
+    );
+}
+
+function Filter(props) {
+    return(
+        <div>
+
+        </div>
+    );
+}
+
+class Catalogue extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dinos: DINOSAURS,
+            order: ORDER,
+            sort: "diet",
+        };
+    }
+
+    renderItem(item) {
+        return(
+            <Item
+                value={item}
+            />
+        );
+    }
+
+    sortAlphabet(itemList) {
+        itemList.sort(function(a,b) {
+            let nameA= a.name.toLowerCase(), nameB = b.name.toLowerCase();
+            if (nameA > nameB) {
+                return 1;
+            } else if (nameA < nameB) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        return itemList;
+    }
+
+    // oldest to youngest
+    sortPeriod(itemList) {
+        let items = [];
+        const order = this.state.order;
+        order.forEach(name => {
+            itemList.forEach(element => {
+                if (name === element.period) {
+                    items.push(this.renderItem(element));
+                }
+            })   
+        });
+        return items;
+    }
+
+    sortLocation(itemList) {
+        itemList.sort(function(a,b) {
+            let nameA= a.location.toLowerCase(), nameB = b.location.toLowerCase();
+            if (nameA > nameB) {
+                return 1;
+            } else if (nameA < nameB) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        return itemList;
+    }
+
+    sortDiet(itemList) {
+        itemList.sort(function(a,b) {
+            let nameA= a.diet.toLowerCase(), nameB = b.diet.toLowerCase();
+            if (nameA > nameB) {
+                return 1;
+            } else if (nameA < nameB) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }); 
+        return itemList;
+    }
+
+    renderCatalogue(itemList) {
+        let items = [];
+        const type = this.state.sort;
+
+        switch (type) {
+            case "none":
+                break;
+            case "alpha":
+                itemList = this.sortAlphabet(itemList);
+                break;
+            case "period":
+                return this.sortPeriod(itemList);
+            case "location":
+                itemList = this.sortLocation(itemList);
+                break;
+            case "diet":
+                itemList = this.sortDiet(itemList);
+                break;
+            default:
+                break;
+        }
+
+        const len = itemList.length;
+        for (let i=0;i<len;i++) {
+            items.push(this.renderItem(itemList[i]));
+        }
+        return items;
+    }
+
+    handleClick() {
+        this.setState({
+            sort: "none",
+        });
+    }
+
+    render() {
+        const dinos = this.state.dinos.slice();
+        return(
+            <div>
+                <h1 style={{textAlign:"center"}}>User's Catalogue</h1>
+                <ul id="nav">
+                    <li><Sort onChange={this.handleClick()}/></li>
+                    <li>{this.state.sort}</li>
+                </ul>
+                <div id="catalogue">
+                    {this.renderCatalogue(dinos)}
+                </div>      
+            </div>
+        );
+    }
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Catalogue />);
