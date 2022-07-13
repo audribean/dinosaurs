@@ -1,18 +1,22 @@
 import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Select from "react-dropdown-select";
 import {DINOSAURS} from './dinosaurs';
 import {ORDER} from './dinosaurs';
-import ReactDOM from 'react-dom/client';
+import {SORTOPTIONS} from './dinosaurs';
 import './index.css';
 const _ = require("lodash");
+
+
 
 // <div style = {{backgroundImage: `url(${imageName})`}}></div>
 
 /*
 TODOS
-1. this.onchange -> how to pass value of select to parent node?
-1.a. handleclick
-2. create filter checkbox
+1. create filter checkbox
 
+
+            
 */
 
 function Item(props) {
@@ -36,16 +40,7 @@ function Item(props) {
 
 function Sort(props) {
     return (
-        <div>
-            <label for="sort">Sort by: </label>
-            <select name="sort" id="sort">
-                <option value="none"></option>
-                <option value="alpha">Alphabet A-Z</option>
-                <option value="period">Time Period (Oldest-Youngest)</option>
-                <option value="location">Location Found</option>
-                <option value="diet">Diet</option>
-            </select>
-        </div> 
+        <div></div>
     );
 }
 
@@ -64,6 +59,7 @@ class Catalogue extends React.Component {
             dinos: DINOSAURS,
             order: ORDER,
             sort: "diet",
+            text: ""
         };
     }
 
@@ -160,20 +156,26 @@ class Catalogue extends React.Component {
         return items;
     }
 
-    handleClick() {
+    handleClick(val) {
         this.setState({
-            sort: "none",
+            sort: val,
         });
     }
 
     render() {
+        const options = SORTOPTIONS.slice();
+        const listItems = options.map((item, id) =>
+            <button key={id} onClick={this.handleClick.bind(this,item.value)}>
+                {item.label}
+            </button>
+        );
         const dinos = this.state.dinos.slice();
         return(
             <div>
                 <h1 style={{textAlign:"center"}}>User's Catalogue</h1>
-                <ul id="nav">
-                    <li><Sort onChange={this.handleClick()}/></li>
-                    <li>{this.state.sort}</li>
+                <ul>
+                    <li>{listItems}</li>
+                    <li>{this.state.text}</li>
                 </ul>
                 <div id="catalogue">
                     {this.renderCatalogue(dinos)}

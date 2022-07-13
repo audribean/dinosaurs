@@ -76,3 +76,32 @@ export const DINOSAURS =
 
 // This is oldest to youngest
 export const ORDER = ['Triassic', 'Jurassic', 'Cretaceous'];
+
+export const SORTOPTIONS = [
+    {
+        id: 1,
+        label: "Default",
+        value: "none"
+    },
+    {
+        id: 2,
+        label: "Alphabet A-Z",
+        value: "alpha"
+    },
+    {
+        id: 3,
+        label: "Time Period (Oldest-Youngest)",
+        value: "period"
+    },
+    {
+        id: 4,
+        label: "Location Found",
+        value: "location"
+    },
+    {
+        id: 5,
+        label: "Diet",
+        value: "diet"
+    }
+
+];
