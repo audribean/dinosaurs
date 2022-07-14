@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Select from "react-dropdown-select";
 import {DINOSAURS} from './dinosaurs';
 import {ORDER} from './dinosaurs';
 import {SORTOPTIONS} from './dinosaurs';
 import {FILTEROPTIONS} from './dinosaurs';
 import './index.css';
-const _ = require("lodash");
+//const _ = require("lodash");
 
 
 
@@ -14,7 +13,7 @@ const _ = require("lodash");
 
 /*
 TODOS
-1. Styling -> Filter checkboxes need label groupings
+2. Once grouped, same groups will have OR filters + different groups will have AND
 */
 
 function Item(props) {
@@ -39,14 +38,6 @@ function Item(props) {
 function Sort(props) {
     return (
         <div></div>
-    );
-}
-
-function Filter(props) {
-    return(
-        <div>
-
-        </div>
     );
 }
 
@@ -199,20 +190,22 @@ class Catalogue extends React.Component {
         );
         const filterOptions = FILTEROPTIONS.slice();
         const filterItems = filterOptions.map((item) => 
-            item.options.map((subitem, id) => 
-                <div key={subitem.id} class={item.value} onChange={this.handleFilterClick.bind(this,subitem.value)}>
-                    <input value={subitem.value} type="checkbox"></input>
-                    <span>{subitem.value}</span>
-                </div>
-        ));
+            <div key={item.id} class="filter-group">
+                <p>{item.label}</p>
+                {item.options.map((subitem) => 
+                    <div key={subitem.id} class={item.value} onChange={this.handleFilterClick.bind(this,subitem.value)}>
+                        <input value={subitem.value} type="checkbox"></input>
+                        <span>{subitem.value}</span>
+                    </div>
+                )}
+            </div>
+        );
         const dinos = this.state.dinos.slice();
         return(
             <div>
                 <h1 style={{textAlign:"center"}}>User's Catalogue</h1>
-                <ul>
-                    <li>{sortItems}</li>
-                    <li>{filterItems}</li>
-                </ul>
+                <div id="sortings">{sortItems}</div>
+                <div id="filters">{filterItems}</div>
                 <div id="catalogue">
                     {this.renderCatalogue(dinos)}
                 </div>      
