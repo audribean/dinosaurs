@@ -103,5 +103,76 @@ export const SORTOPTIONS = [
         label: "Diet",
         value: "diet"
     }
+];
 
+export const FILTEROPTIONS = [
+    {
+        id: 1,
+        label: "Time period",
+        value: "timeFilter",
+        options: [
+            {
+                id: 1,
+                value: "Triassic"
+            },
+            {
+                id: 2,
+                value: "Jurassic"
+            },
+            {
+                id: 3,
+                value: "Cretaceous"
+            }
+        ]
+    },
+    {
+        id: 2,
+        label: "Location found",
+        value: "locationFilter",
+        options: [
+            {
+                id: 1,
+                value: "Africa"
+            },
+            {
+                id: 2,
+                value: "Asia", 
+            },
+            {
+                id: 3,
+                value: "Europe"
+            },
+            {
+                id: 4,
+                value: "Oceania"
+            },
+            {
+                id: 5,
+                value: "North America"
+            },
+            {
+                id: 6,
+                value: "South America"
+            }
+        ]
+    },
+    {
+        id: 3,
+        label: "Diet",
+        value: "dietFilter",
+        options: [
+            {
+                id: 1,
+                value: "Carnivore"
+            },
+            {
+                id: 2,
+                value: "Herbivore"
+            },
+            {
+                id: 3,
+                value: "Omnivore"
+            } 
+        ]
+    }
 ];

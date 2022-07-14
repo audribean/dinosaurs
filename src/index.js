@@ -4,6 +4,7 @@ import Select from "react-dropdown-select";
 import {DINOSAURS} from './dinosaurs';
 import {ORDER} from './dinosaurs';
 import {SORTOPTIONS} from './dinosaurs';
+import {FILTEROPTIONS} from './dinosaurs';
 import './index.css';
 const _ = require("lodash");
 
@@ -13,7 +14,8 @@ const _ = require("lodash");
 
 /*
 TODOS
-1. create filter checkbox
+1. Filter checkboxes need label groupings and submit button
+2. Change mapping keys to item.id
 
 
             
@@ -59,7 +61,7 @@ class Catalogue extends React.Component {
             dinos: DINOSAURS,
             order: ORDER,
             sort: "diet",
-            text: ""
+            filter: ["Jurassic", "Herbivore"]
         };
     }
 
@@ -127,11 +129,25 @@ class Catalogue extends React.Component {
         return itemList;
     }
 
+    // applies each selected filter to the catalogue
+    filterCatalogue(itemList) {
+        const filterSettings = this.state.filter;
+        filterSettings.forEach(filter => {
+            itemList = itemList.filter(dino => {
+                return filter === dino.period || filter === dino.diet || filter === dino.location;
+            });
+        });
+        return itemList;
+    }
+
+    // filters, sorts, then renders the catalogue
     renderCatalogue(itemList) {
         let items = [];
-        const type = this.state.sort;
+        const sort = this.state.sort;
 
-        switch (type) {
+        itemList = this.filterCatalogue(itemList);
+
+        switch (sort) {
             case "none":
                 break;
             case "alpha":
@@ -156,26 +172,36 @@ class Catalogue extends React.Component {
         return items;
     }
 
-    handleClick(val) {
+    handleSortClick(val) {
         this.setState({
             sort: val,
         });
     }
 
     render() {
-        const options = SORTOPTIONS.slice();
-        const listItems = options.map((item, id) =>
-            <button key={id} onClick={this.handleClick.bind(this,item.value)}>
+        const sortOptions = SORTOPTIONS.slice();
+        const sortItems = sortOptions.map((item, id) =>
+            <button key={id} onClick={this.handleSortClick.bind(this,item.value)}>
                 {item.label}
             </button>
+        );
+        const filterOptions = FILTEROPTIONS.slice();
+        const filterItems = filterOptions.map((item) => 
+            item.options.map((subitem, id) => 
+                <div key={id} class={item.value}>
+                    <input value={subitem.value} type="checkbox"></input>
+                    <span>{subitem.value}</span>
+                </div>
+        )
         );
         const dinos = this.state.dinos.slice();
         return(
             <div>
                 <h1 style={{textAlign:"center"}}>User's Catalogue</h1>
                 <ul>
-                    <li>{listItems}</li>
-                    <li>{this.state.text}</li>
+                    <li>{sortItems}</li>
+                    <li>{this.state.filter}</li>
+                    <li>{filterItems}</li>
                 </ul>
                 <div id="catalogue">
                     {this.renderCatalogue(dinos)}
