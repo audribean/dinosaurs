@@ -14,11 +14,7 @@ const _ = require("lodash");
 
 /*
 TODOS
-1. Filter checkboxes need label groupings and submit button
-2. Change mapping keys to item.id
-
-
-            
+1. Styling -> Filter checkboxes need label groupings
 */
 
 function Item(props) {
@@ -60,8 +56,8 @@ class Catalogue extends React.Component {
         this.state = {
             dinos: DINOSAURS,
             order: ORDER,
-            sort: "diet",
-            filter: ["Jurassic", "Herbivore"]
+            sort: "none",
+            filter: []
         };
     }
 
@@ -131,8 +127,8 @@ class Catalogue extends React.Component {
 
     // applies each selected filter to the catalogue
     filterCatalogue(itemList) {
-        const filterSettings = this.state.filter;
-        filterSettings.forEach(filter => {
+        const filters = this.state.filter;
+        filters.forEach(filter => {
             itemList = itemList.filter(dino => {
                 return filter === dino.period || filter === dino.diet || filter === dino.location;
             });
@@ -178,29 +174,43 @@ class Catalogue extends React.Component {
         });
     }
 
+    handleFilterClick(val) {
+        // if val is already in filters, remove it
+        // if val is not in filters add it
+        let filters = this.state.filter;
+
+        if (filters.includes(val)) {
+            const index = filters.indexOf(val);
+            filters.splice(index, 1);
+        } else {
+            filters.push(val);
+        }
+        this.setState({
+            filter: filters,
+        });
+    }
+
     render() {
         const sortOptions = SORTOPTIONS.slice();
         const sortItems = sortOptions.map((item, id) =>
-            <button key={id} onClick={this.handleSortClick.bind(this,item.value)}>
+            <button key={item.id} onClick={this.handleSortClick.bind(this,item.value)}>
                 {item.label}
             </button>
         );
         const filterOptions = FILTEROPTIONS.slice();
         const filterItems = filterOptions.map((item) => 
             item.options.map((subitem, id) => 
-                <div key={id} class={item.value}>
+                <div key={subitem.id} class={item.value} onChange={this.handleFilterClick.bind(this,subitem.value)}>
                     <input value={subitem.value} type="checkbox"></input>
                     <span>{subitem.value}</span>
                 </div>
-        )
-        );
+        ));
         const dinos = this.state.dinos.slice();
         return(
             <div>
                 <h1 style={{textAlign:"center"}}>User's Catalogue</h1>
                 <ul>
                     <li>{sortItems}</li>
-                    <li>{this.state.filter}</li>
                     <li>{filterItems}</li>
                 </ul>
                 <div id="catalogue">
