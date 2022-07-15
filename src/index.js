@@ -13,7 +13,10 @@ import './index.css';
 
 /*
 TODOS
-2. Once grouped, same groups will have OR filters + different groups will have AND
+1. Once grouped, same groups will have OR filters + different groups will have AND
+2. Align the sort options in the sort/filter bar
+3. Link new page for customizing the catalogue
+4. Turn DINOSAURS const into JSON
 */
 
 function Item(props) {
@@ -188,17 +191,17 @@ class Catalogue extends React.Component {
     render() {
         const sortOptions = SORTOPTIONS.slice();
         const sortItems = sortOptions.map((item, id) =>
-            <p
+            <li
                 key={item.id}
                 class="sort-button"
                 onClick={this.handleSortClick.bind(this,item.value)}
                 style={{color: this.state.sort === item.value ? "red" : "black"}}>
                 <u>{item.label}</u>
-            </p>
+            </li>
         );
         const filterOptions = FILTEROPTIONS.slice();
         const filterItems = filterOptions.map((item) => 
-            <div key={item.id} class="filter-group">
+            <li key={item.id} class="filter-group">
                 <p>{item.label}</p>
                 {item.options.map((subitem) => 
                     <div key={subitem.id} class={item.value} onChange={this.handleFilterClick.bind(this,subitem.value)}>
@@ -206,14 +209,22 @@ class Catalogue extends React.Component {
                         <span>{subitem.value}</span>
                     </div>
                 )}
-            </div>
+            </li>
         );
         const dinos = this.state.dinos.slice();
         return(
             <div>
                 <h1 style={{textAlign:"center"}}>User's Catalogue</h1>
-                <div id="sortings">{sortItems}</div>
-                <div id="filters">{filterItems}</div>
+                <ul id="nav-bar">
+                    <li><h2>Sort Options</h2></li>
+                   {sortItems}
+                    <li>
+                        <div id="grow">
+                            <h2>Filters</h2>
+                            <div id="filters">{filterItems}</div>
+                        </div>
+                    </li>
+                </ul>
                 <div id="catalogue">
                     {this.renderCatalogue(dinos)}
                 </div>      

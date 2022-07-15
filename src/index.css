@@ -2,6 +2,8 @@
 
 body {
   margin: 0;
+  padding-left: 10%;
+  padding-right: 10%;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
@@ -28,7 +30,41 @@ a:hover {
 }
 
 /* SETTINGS BAR STYLING */
-.filter-group {
+#nav-bar {
+  list-style-type: none;
+  overflow: hidden;
+  /* background-color: red; */
+}
+
+#nav-bar li {
+  float: left;
+}
+
+#grow {
+  display: absolute;
+  z-index: 2;
+  overflow: hidden;
+}
+
+#grow:hover {
+  border: 1px solid black;
+}
+
+#grow:hover #filters {
+  display: block;
+  position: fixed;
+  z-index: 3;
+  background-color: white;
+  padding: 1%;
+  border: 1px solid black;
+
+}
+
+#filters {
+  display: none;
+}
+
+/* .filter-group {
   text-align: left;
   max-width:20%;
 }
@@ -38,12 +74,15 @@ a:hover {
   flex-direction: row;
   justify-content: center;
   gap: 2%;
+} */
+
+.sort-button {
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
-#sortings {
-  display: flex;
-  gap: 2%;
-  justify-content: center;
+.sort-button:hover {
+  border: 1px solid black;
 }
 
 /* CATALOGUE STYLING */
@@ -52,7 +91,7 @@ a:hover {
   width: 20%;
   border: 1px solid black;
   text-align: center;
-  z-index: 2;
+  /* z-index: 2; */
   position: relative;
 }
 
