@@ -184,9 +184,12 @@ class Catalogue extends React.Component {
     render() {
         const sortOptions = SORTOPTIONS.slice();
         const sortItems = sortOptions.map((item, id) =>
-            <button key={item.id} onClick={this.handleSortClick.bind(this,item.value)}>
-                {item.label}
-            </button>
+            <p
+                key={item.id}
+                onClick={this.handleSortClick.bind(this,item.value)}
+                style={{color: this.state.sort === item.value ? "red" : "black"}}>
+                <u>{item.label}</u>
+            </p>
         );
         const filterOptions = FILTEROPTIONS.slice();
         const filterItems = filterOptions.map((item) => 
