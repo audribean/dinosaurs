@@ -15,14 +15,19 @@ code {
     monospace;
 }
 
-/* SETTINGS BAR STYLING */
-button {
-  font-family: 'Gaegu'
-}
-button:focus {
-  font-weight: bold;
+a {
+  color: purple;
 }
 
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: rgb(46, 0, 130);
+}
+
+/* SETTINGS BAR STYLING */
 .filter-group {
   text-align: left;
   max-width:20%;
@@ -45,28 +50,53 @@ button:focus {
 
 .item {
   width: 20%;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   text-align: center;
   z-index: 2;
+  position: relative;
 }
 
 .item:nth-child(3n+3) {
-  background-color: #fdf3ac;
+  /* background-color: #fdf3ac; */
+  background-image: linear-gradient(#fdf3ac, white);
 }
 
 .item:nth-child(3n+2) {
-  background-color: #A0C3D7;
+  /* background-color: #A0C3D7; */
+  background-image: linear-gradient(#A0C3D7, white);
 }
 
 .item:nth-child(3n+1) {
-  background-color: #D3ABBB;
+  /* background-color: #D3ABBB; */
+  background-image: linear-gradient(#D3ABBB, white);
 }
 
 .item img {
   object-fit: cover;
-  height: 10em;
+  height: 15em;
   width: 90%;
+  margin-bottom: 2%;
+  border: 1px solid black;
   /* max-width: 100%; */
+}
+
+/* Hide image when hovered */
+.img-content:hover img {
+  opacity: 0.2;
+}
+
+/* Show dino-info when hovered */
+.img-content:hover div{
+  visibility: visible;
+}
+
+/* Dino info to be revealed */
+.img-content div {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #catalogue {

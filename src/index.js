@@ -23,14 +23,18 @@ function Item(props) {
     return (
         <div class="item">
             <p><b>{props.value.name}</b></p>
-            <img
-                src={imageName}
-                alt={altText}>
-            </img>
-            <a href={props.value.source}>Image Source</a>
-            <p>{props.value.period}</p>
-            <p>{props.value.location}</p>
-            <p>{props.value.diet}</p>
+            <div class="img-content">
+                <img
+                    src={imageName}
+                    alt={altText}>
+                </img>
+                <div>
+                    <p>{props.value.period}</p>
+                    <p>{props.value.location}</p>
+                    <p>{props.value.diet}</p>
+                    <a href={props.value.source}>Image Source</a>
+                </div>
+            </div>
         </div>
     )
 }
@@ -186,6 +190,7 @@ class Catalogue extends React.Component {
         const sortItems = sortOptions.map((item, id) =>
             <p
                 key={item.id}
+                class="sort-button"
                 onClick={this.handleSortClick.bind(this,item.value)}
                 style={{color: this.state.sort === item.value ? "red" : "black"}}>
                 <u>{item.label}</u>
