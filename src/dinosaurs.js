@@ -127,6 +127,25 @@ export const FILTEROPTIONS = [
     },
     {
         id: 2,
+        label: "Diet",
+        value: "dietFilter",
+        options: [
+            {
+                id: 1,
+                value: "Carnivore"
+            },
+            {
+                id: 2,
+                value: "Herbivore"
+            },
+            {
+                id: 3,
+                value: "Omnivore"
+            } 
+        ]
+    },
+    {
+        id: 3,
         label: "Location found",
         value: "locationFilter",
         options: [
@@ -155,24 +174,5 @@ export const FILTEROPTIONS = [
                 value: "South America"
             }
         ]
-    },
-    {
-        id: 3,
-        label: "Diet",
-        value: "dietFilter",
-        options: [
-            {
-                id: 1,
-                value: "Carnivore"
-            },
-            {
-                id: 2,
-                value: "Herbivore"
-            },
-            {
-                id: 3,
-                value: "Omnivore"
-            } 
-        ]
-    }
+    } 
 ];
